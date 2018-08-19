@@ -1,8 +1,20 @@
 ---
+
 alertmanager_version: 0.15.1
 
+alertmanager_download_url: "https://github.com/prometheus/alertmanager/releases/download/v{{ alertmanager_version }}/{{ alertmanager_archive_name }}"
+alertmanager_archive_name: "{{ alertmanager_extracted_dir }}.tar.gz"
+alertmanager_extracted_dir: "alertmanager-{{ alertmanager_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+
+alertmanager_force_install: false
+
+alertmanager_root_dir: /opt/alertmanager
+alertmanager_release_dir: "{{ alertmanager_root_dir }}/current"
 alertmanager_config_dir: /etc/alertmanager
 alertmanager_db_dir: /var/lib/alertmanager
+
+alertmanager_user: alertmanager
+alertmanager_group: alertmanager
 
 alertmanager_config_file: 'alertmanager.yml.j2'
 
